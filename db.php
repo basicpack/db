@@ -4,9 +4,9 @@
 
 require 'vendor/autoload.php';
 
-function db($db=false){
-    if($db==false){
-        $db=[
+function db($cfg=false){
+    if($cfg==false){
+        $cfg=[
         'database_type' => 'mysql',
         'database_name' => 'test',
         'server' => 'localhost',
@@ -14,5 +14,5 @@ function db($db=false){
         'password' => ''
         ];
     }
-    return new Medoo\Medoo($db);
+    return new Medoo\Medoo($cfg);
 }

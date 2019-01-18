@@ -2,12 +2,12 @@
 Configuração padrão:
 ```php
 <?php
-$db=[
+$cfg=[
     'database_type' => 'mysql',
     'database_name' => 'test',
     'server' => 'localhost',
     'username' => 'root',
     'password' => ''
 ];
-$db=db($db);
+$db=db($cfg);
 ```
