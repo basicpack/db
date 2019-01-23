@@ -9,9 +9,9 @@ function createDB($cfg){
     if ($conn->connect_error) {
         die("erro de conexão: ".PHP_EOL.$conn->connect_error);
     }
-    $sql = "SHOW DATABASES LIKE  '".$_ENV['db_name']."'";
+    $sql = "SHOW DATABASES LIKE  '".$cfg['database_name']."'";
     if ($conn->query($sql)->num_rows <> 1) {
-        $sql = "CREATE DATABASE ".$_ENV['db_name'];
+        $sql = "CREATE DATABASE ".$cfg['database_name'];
         if ($conn->query($sql) === true) {
             return true;
         } else {
