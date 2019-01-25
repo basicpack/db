@@ -23,14 +23,19 @@ function createDB($cfg){
 }
 
 function db($cfg=false){
+    $filename=ROOT.'config/db.php';
     if($cfg==false){
-        $cfg=[
-        'database_type' => 'mysql',
-        'database_name' => 'test',
-        'server' => 'localhost',
-        'username' => 'root',
-        'password' => ''
-        ];
+        if(file_exists($filename)){
+            $cfg=require $filename;
+        }else{
+            $cfg=[
+            'database_type' => 'mysql',
+            'database_name' => 'test',
+            'server' => 'localhost',
+            'username' => 'root',
+            'password' => ''
+            ];
+        }
     }
     return new Medoo\Medoo($cfg);
 }
