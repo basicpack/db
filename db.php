@@ -23,10 +23,16 @@ function createDB($cfg){
 }
 
 function db($cfg=false){
-    $filename=ROOT.'config/db.php';
     if($cfg==false){
-        if(file_exists($filename)){
-            $cfg=require $filename;
+        inc('env');
+        if(isset($_ENV)){
+            $cfg=[
+            'database_type' => 'mysql',
+            'database_name' => $_ENV['MYSQL_DB'],
+            'server' => $_ENV['MYSQL_SERVER'],
+            'username' => $_ENV['MYSQL_USER'],
+            'password' => $_ENV['MYSQL_PASSWORD']
+            ];
         }else{
             $cfg=[
             'database_type' => 'mysql',
