@@ -4,7 +4,10 @@
 
 require 'vendor/autoload.php';
 
-function createDB($cfg){
+function createDB($cfg=false){
+    if(!$cfg){
+        $cfg=getDbCfg();
+    }
     $conn = new mysqli($cfg['server'], $cfg['username'], $cfg['password']);
     if ($conn->connect_error) {
         die("erro de conexão: ".PHP_EOL.$conn->connect_error);
@@ -23,25 +26,30 @@ function createDB($cfg){
 }
 
 function db($cfg=false){
-    if($cfg==false){
-        inc('env');
-        if(isset($_ENV)){
-            $cfg=[
+    if(!$cfg){
+        $cfg=getDbCfg();
+    }
+    return new Medoo\Medoo($cfg);
+}
+
+function getDbCfg(){
+    inc('env');
+    if(isset($_ENV)){
+        $cfg=[
             'database_type' => 'mysql',
             'database_name' => $_ENV['MYSQL_DB'],
             'server' => $_ENV['MYSQL_SERVER'],
             'username' => $_ENV['MYSQL_USER'],
             'password' => $_ENV['MYSQL_PASSWORD']
-            ];
-        }else{
-            $cfg=[
+        ];
+    }else{
+        $cfg=[
             'database_type' => 'mysql',
             'database_name' => 'test',
             'server' => 'localhost',
             'username' => 'root',
             'password' => ''
-            ];
-        }
+        ];
     }
-    return new Medoo\Medoo($cfg);
+    return $cfg;
 }
