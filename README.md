@@ -1,5 +1,8 @@
 # DB
-Configuração padrão:
+## install
+    basic install db env
+
+## config
 ```php
 <?php
 $cfg=[
